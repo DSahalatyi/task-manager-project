@@ -426,6 +426,51 @@
     }
   },
   {
+    "model": "tasks.project",
+    "pk": 4,
+    "fields": {
+      "name": "TBD: Customer Feedback System",
+      "description": "A system to collect and analyze customer feedback on products and services.",
+      "teams": [
+        1,
+        4,
+        5
+      ],
+      "created_at": "2024-09-24T12:00:00Z",
+      "slug": "tbd-customer-feedback-system"
+    }
+  },
+  {
+    "model": "tasks.project",
+    "pk": 5,
+    "fields": {
+      "name": "TBD: Inventory Management System",
+      "description": "A system to manage inventory levels, orders, sales, and deliveries.",
+      "teams": [
+        2,
+        3,
+        5
+      ],
+      "created_at": "2024-09-24T12:00:00Z",
+      "slug": "tbd-inventory-management-system"
+    }
+  },
+  {
+    "model": "tasks.project",
+    "pk": 6,
+    "fields": {
+      "name": "TBD: Marketing Analytics Dashboard",
+      "description": "A dashboard for tracking marketing campaigns and their effectiveness.",
+      "teams": [
+        1,
+        4,
+        6
+      ],
+      "created_at": "2024-09-24T12:00:00Z",
+      "slug": "tbd-marketing-analytics-dashboard"
+    }
+  },
+  {
     "model": "tasks.task",
     "pk": 1,
     "fields": {
