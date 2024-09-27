@@ -13,7 +13,9 @@ class Position(models.Model):
 
 
 class Employee(AbstractUser):
-    position = models.ForeignKey("Position", on_delete=models.RESTRICT)
+    position = models.ForeignKey(
+        "Position", on_delete=models.RESTRICT, related_name="employees"
+    )
     slug = AutoSlugField(
         populate_from=["username", "first_name", "last_name"], unique=True
     )
@@ -24,8 +26,12 @@ class Employee(AbstractUser):
 
 class Invitation(models.Model):
     email = models.EmailField(unique=True)
-    position = models.ForeignKey(Position, on_delete=models.CASCADE)
-    invited_by = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
+    position = models.ForeignKey(
+        Position, on_delete=models.CASCADE, related_name="invitations"
+    )
+    invited_by = models.ForeignKey(
+        get_user_model(), on_delete=models.CASCADE, related_name="invitations"
+    )
     created_at = models.DateTimeField(auto_now_add=True)
     is_accepted = models.BooleanField(default=False)
     slug = AutoSlugField(populate_from=["position", "created_at"], unique=True)

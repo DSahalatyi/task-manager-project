@@ -26,7 +26,9 @@ class Task(models.Model):
     priority = models.CharField(
         max_length=100, choices=PRIORITY_CHOICES, blank=False, null=False
     )
-    task_type = models.ForeignKey("TaskType", on_delete=models.RESTRICT)
+    task_type = models.ForeignKey(
+        "TaskType", on_delete=models.RESTRICT, related_name="tasks"
+    )
     assignees = models.ManyToManyField(
         settings.AUTH_USER_MODEL, related_name="tasks", blank=True
     )
@@ -57,7 +59,7 @@ class TaskTag(models.Model):
 class Project(models.Model):
     name = models.CharField(max_length=100)
     description = models.TextField(blank=True, null=True)
-    teams = models.ManyToManyField(Team, blank=True)
+    teams = models.ManyToManyField(Team, blank=True, related_name="projects")
     created_at = models.DateTimeField(auto_now_add=True)
     slug = AutoSlugField(populate_from=["name"], unique=True)
 
