@@ -14,6 +14,8 @@ import os
 from dotenv import load_dotenv
 from pathlib import Path
 
+import dj_database_url
+
 
 load_dotenv()
 
@@ -102,17 +104,15 @@ AUTHENTICATION_BACKENDS = [
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": os.getenv("PGDATABASE"),
-        "USER": os.getenv("PGUSER"),
-        "PASSWORD": os.getenv("PGPASSWORD"),
-        "HOST": os.getenv("PGHOST"),
-        "PORT": os.getenv("PGPORT", 5432),
-        "OPTIONS": {
-            "sslmode": "require",
-        },
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": BASE_DIR / "db.sqlite3",
     }
 }
+
+if os.getenv("ENVIRONMENT") == "production":
+    db_from_env = dj_database_url.config(conn_max_age=500)
+    DATABASES["default"].update(db_from_env)
+
 
 # Email settings
 # EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
