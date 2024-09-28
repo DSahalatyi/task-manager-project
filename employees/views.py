@@ -81,7 +81,7 @@ class EmployeeRegisterView(View):
             user.backend = "employees.backends.EmailBackend"
             login(request, user)
             invitation.is_accepted = True
-            invitation.save()
+            invitation.save(update_fields=["is_accepted"])
             return redirect(reverse("tasks:dashboard"))
         return render(request, "employees/employee_register.html", {"form": form})
 

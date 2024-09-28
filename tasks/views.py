@@ -165,11 +165,11 @@ class TaskDetailView(LoginRequiredMixin, DetailView):
         if action == "complete" and not task.is_completed:
             task.is_completed = True
             task.completed_by = self.request.user
-            task.save()
+            task.save(update_fields=["is_completed", "completed_by"])
         if action == "open" and task.is_completed:
             task.is_completed = False
             task.completed_by = None
-            task.save()
+            task.save(update_fields=["is_completed", "completed_by"])
 
         return HttpResponseRedirect(
             reverse_lazy("tasks:task-detail", kwargs={"slug": task.slug})
